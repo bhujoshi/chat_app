@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    name: $('#user').val(),
+                    userName: $('#userName').val()
+                };
+                $.ajax({
+                    url: "/users",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                      var json = JSON.parse(data.responseText);
+                      console.log(json);
+                      if(json.status == 203){
+                        window.location = window.location.href + "chatroom?id="+json.id
+                      }else{
+                        $('#output').html(json.message);
+                      }
+                    }
+                });
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <h3 id="output"><h3>
+    <h3>Enter following details to enter in Chat Room</h3>
+    <p>Name: <input id="user" type="text" /></p>
+    <p>Unique User Name: <input id="userName" type="text" /></p>
+    <input id="user-submit" type="submit" />
+  </body>
+</html>
