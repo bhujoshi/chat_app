@@ -6,7 +6,7 @@ How to run this application.
 
 2.Import sql file chat_app.sql
 
-3.Update database connection details from index.js
+3.Update database connection details in index.js line no 18
 
 4.npm install
 
